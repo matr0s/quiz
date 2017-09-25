@@ -1,6 +1,5 @@
 
 (function(){
-
 //// Question protorype
 var Question = function (question, answers, correctAnswer){
  this.question = question;
