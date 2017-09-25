@@ -1,6 +1,6 @@
-//////////////////////////////////////////
 
-var questionsArray = [], userAnswer, randomQuestion, question0, question1, question2, question3;
+(function(){
+
 //// Question protorype
 var Question = function (question, answers, correctAnswer){
  this.question = question;
@@ -9,43 +9,33 @@ var Question = function (question, answers, correctAnswer){
 }
 
 Question.prototype.questionPrint = function() {
- 		console.log('Question #' + (randomQuestion+1) + ': ' + this.question);
+ 		console.log('Question #' + (n+1) + ': ' + this.question);
  		for (var j = 0; j < this.answers.length; j++) {
-			console.log(this.answers[j]);
+			console.log(j + ': ' + this.answers[j]);
 		}
  }
 
 Question.prototype.compareAnswer = function(){
-if (userAnswer == this.correctAnswer) {
+if (userAnswer === this.correctAnswer) {
 	console.log('Correct answer. My congratulations!');
 } else {
 	console.log('Wrong answer. Looks like You are loooooser!!!');
 }
 }
-
-
-questionsInit();
-questionsArray[randomQuestion].questionPrint();
-userAnswer = prompt('Please input your answer (number) or type "exit" to quit');
-questionsArray[randomQuestion].compareAnswer();
-
-
-
-
-///FUNCTIONS///
-
-function questionsInit() {
-/// List with questions
-question0 = new Question('Do you see this question?', ['0: Yes', '1: No', '2: Hz'], 0);
-question1 = new Question('Whos is developer here?', ['0: Petro', '1: Serhii', '2: Hz'], 1);
-question2 = new Question('Just another question with correct ansfer "Hz"', ['0: Yes', '1: Hz'], 1);
-question3 = new Question('What is DOIT?', ['0: Dev Company', '1: Nike Moto', '2: Hz'], 0);
+/// Init
+var q0 = new Question('Do you see this question?', ['Yes', 'No', 'Hz'], 0);
+var q1 = new Question('Whos is developer here?', ['Petro', 'Serhii', 'Hz'], 1);
+var q2 = new Question('Just another question with correct ansfer "Hz"', ['Yes', 'Hz'], 1);
+var q3 = new Question('What is DOIT?', ['Dev Company', 'Nike Moto', 'Hz'], 0);
 /// Array with questions creation
-for (var i = 0; i <= 3; i++) {
-	questionsArray.push(window['question'+i]);
-}
-/// Get random question
-randomQuestion = Math.round((Math.random() * (questionsArray.length-1)));
-}
+var questionsArray = [q0, q1, q2, q3];
 
-console.log(randomQuestion);
+/// Get random question
+var n = Math.floor((Math.random() * (questionsArray.length)));
+questionsArray[n].questionPrint();
+
+////Main block with code execution here
+var userAnswer = parseInt(prompt('Please input your answer (number) or type "exit" to quit'));
+questionsArray[n].compareAnswer();
+
+})();
